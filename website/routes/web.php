@@ -11,6 +11,12 @@
 |
 */
 
+// default homepage
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.homepage');
+});
+
+// my homepage
+Route::get('/home', function () {
+    return view('layouts.master');
 });
