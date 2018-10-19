@@ -17,11 +17,11 @@
             <div class="nav-wrapper amber">
                 <a href="/" class="brand-logo">De Voorbijgang</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="">Home</a></li>
-                <li><a href="/View_Occasion">Occasionoverzicht</a></li>
-                <li><a href="/Add_New_Car_Listing">Auto toevoegen</a></li>
-                <li><a href="">Routebeschrijving</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/occasion">Occasionoverzicht</a></li>
+                <li><a href="/addCar">Auto toevoegen</a></li>
+                <li><a href="/route">Routebeschrijving</a></li>
+                <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
