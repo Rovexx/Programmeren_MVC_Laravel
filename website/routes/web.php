@@ -11,12 +11,17 @@
 |
 */
 
-// default homepage
-Route::get('/', function () {
-    return view('pages.homepage');
-});
+// homepage
+Route::get('/', 'PagesController@homepage');
 
-// my homepage
-Route::get('/home', function () {
-    return view('layouts.master');
-});
+// view occasion page
+Route::get('/occasion', 'PagesController@occasion');
+
+// add new car page
+Route::get('/addCar', 'PagesController@addCar');
+
+// route page
+Route::get('/route', 'PagesController@route');
+
+// contact page
+Route::get('/contact', 'PagesController@contact');

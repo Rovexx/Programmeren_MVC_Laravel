@@ -29,6 +29,10 @@
         <!-- content -->
         <main>
             @yield('homepage')
+            @yield('addCar')
+            @yield('route')
+            @yield('occasion')
+            @yield('contact')
         </main>
 
         <!-- footer -->
