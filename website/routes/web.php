@@ -13,13 +13,10 @@
 
 // homepage
 Route::get('/', 'PagesController@homepage');
-// view occasion page
-Route::get('/occasion', 'PagesController@occasion');
-// add new car page
-Route::get('/addCar', 'PagesController@addCar');
 // route page
 Route::get('/route', 'PagesController@route');
 // contact page
 Route::get('/contact', 'PagesController@contact');
 
+// automatic routes for resources
 Route::resource('occasions', 'OccasionsController');

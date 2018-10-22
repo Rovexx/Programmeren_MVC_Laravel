@@ -10,14 +10,6 @@ class PagesController extends Controller
         return view('pages.homepage');
     }
 
-    public function occasion(){
-        return view('pages.occasion');
-    }
-
-    public function addCar(){
-        return view('pages.addCar');
-    }
-
     public function route(){
         return view('pages.route');
     }

@@ -16,7 +16,7 @@ class OccasionsController extends Controller
     {
         // fetch all the data from the model
         $occasions = Occasion::all();
-        return view('pages.occasion')->with('occasions', $occasions);
+        return view('occasions.index')->with('occasions', $occasions);
     }
 
     /**
@@ -48,8 +48,8 @@ class OccasionsController extends Controller
      */
     public function show($id)
     {
-        return Occasion::find($id);
-        return view('pages.showcase')->with('occasion', $occasion);
+        $occasion = Occasion::find($id);
+        return view('occasions.show')->with('occasion', $occasion);
     }
 
     /**

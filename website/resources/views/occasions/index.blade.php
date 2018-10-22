@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('occasion')
+@section('content')
     <main class="grey lighten-5">
         <div class="row">
             <!-- Filter menu -->

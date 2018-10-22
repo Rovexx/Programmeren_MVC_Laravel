@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('addCar')
+@section('content')
 <div class="row center">
         <H1>Nieuwe auto aan occasion toevoegen</H1>
         <h5>Vul de juiste gegevens in</h5>
