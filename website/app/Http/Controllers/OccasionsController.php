@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Occasion;
 
 class OccasionsController extends Controller
 {
@@ -13,7 +14,9 @@ class OccasionsController extends Controller
      */
     public function index()
     {
-        //
+        // fetch all the data from the model
+        $occasions = Occasion::all();
+        return view('pages.occasion')->with('occasions', $occasions);
     }
 
     /**
@@ -45,7 +48,8 @@ class OccasionsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Occasion::find($id);
+        return view('pages.showcase')->with('occasion', $occasion);
     }
 
     /**

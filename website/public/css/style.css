@@ -7,3 +7,15 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+li .post_Title {
+  margin: 0px;
+}
+
+li .row {
+  margin: 0px;
+}
+
+li .attributes {
+  font-weight: 600;
+}

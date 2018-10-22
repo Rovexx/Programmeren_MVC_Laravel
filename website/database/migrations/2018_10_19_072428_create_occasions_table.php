@@ -22,7 +22,7 @@ class CreateOccasionsTable extends Migration
             $table->mediumInteger('mileage');
             $table->string('fuel');
             $table->tinyInteger('doors');
-            $table->decimal('engineCapacity', 2, 1);
+            $table->decimal('engineCapacity', 4, 1);
             $table->smallInteger('weight');
             $table->string('transmission');
             $table->tinyInteger('gears');
