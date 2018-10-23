@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="row center">
+    <div class="row center">
         <H1>Nieuwe auto aan occasion toevoegen</H1>
         <h5>Vul de juiste gegevens in</h5>
     </div>
     <div class="row">
         <div class="col s8 offset-s2 z-depth-1">
             <br><br>
-            <form class="col s12 white" action="/occasion/add" method="POST">
+            <form class="col s12 white" action="{{ action('OccasionsController@store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="input-field col s6">
@@ -112,5 +112,5 @@
 @stop
 
 @section('scripts')
-<script type="text/javascript" src="{!! asset('js/materialize.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/materialize.js') !!}"></script>
 @stop

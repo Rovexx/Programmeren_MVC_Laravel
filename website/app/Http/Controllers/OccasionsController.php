@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Occasion;
+use Session;
 
 class OccasionsController extends Controller
 {
@@ -15,7 +16,11 @@ class OccasionsController extends Controller
     public function index()
     {
         // fetch all the data from the model
-        $occasions = Occasion::all();
+        //$occasions = Occasion::orderBy('make', 'asc')->get();
+
+        $occasions = Occasion::orderBy('make', 'asc')->Paginate(15);
+        // controleren op post data en dan filteren
+        // $occasions = Occasion::where('name', 'data uit post')->get();
         return view('occasions.index')->with('occasions', $occasions);
     }
 
@@ -26,7 +31,7 @@ class OccasionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('occasions.create');
     }
 
     /**
@@ -37,7 +42,45 @@ class OccasionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate the form data that we got via POST request
+        $this->validate($request, [
+            'make' => 'required',
+            'model' => 'required',
+            'color' => 'required',
+            'year' => 'required',
+            'mileage' => 'required',
+            'fuel' => 'required',
+            'doors' => 'required',
+            'engineCapacity' => 'required',
+            'weight' => 'required',
+            'transmission' => 'required',
+            'gears' => 'required',
+            'plate' => 'required',
+            'price' => 'required'
+        ]);
+
+        // Create Occasion
+        $occasion = new Occasion;
+        $occasion->make = $request->input('make');
+        $occasion->model = $request->input('model');
+        $occasion->color = $request->input('color');
+        $occasion->year = $request->input('year');
+        $occasion->mileage = $request->input('mileage');
+        $occasion->fuel = $request->input('fuel');
+        $occasion->doors = $request->input('doors');
+        $occasion->engineCapacity = $request->input('engineCapacity');
+        $occasion->weight = $request->input('weight');
+        $occasion->transmission = $request->input('transmission');
+        $occasion->gears = $request->input('gears');
+        $occasion->plate = $request->input('plate');
+        $occasion->price = $request->input('price');
+        $occasion->save();
+
+        // success message
+        Session::flash('success', 'Auto Toegevoegd');
+
+        //redirect
+        return redirect('/occasions');
     }
 
     /**

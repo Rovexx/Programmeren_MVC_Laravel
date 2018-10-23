@@ -48,7 +48,7 @@
             <div class="col s9 right">
                 <ul class="collection">
                     <!-- list of cars -->
-                    @if(count($occasions) > 1)
+                    @if(count($occasions) > 0)
                         @foreach($occasions as $occasion)
                     <li class="collection-item">
                         <div class="row">
@@ -97,6 +97,7 @@
                         </div>  
                     </li>
                     @endforeach
+                    {{ $occasions->links() }}
                     @else
                         <li>Geen occasions</li>
                     @endif
@@ -104,4 +105,8 @@
             </div>
         </div>
     </main>
+@stop
+
+@section('scripts')
+    <script type="text/javascript" src="{!! asset('js/materialize.js') !!}"></script>
 @stop
