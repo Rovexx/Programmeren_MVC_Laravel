@@ -29,3 +29,7 @@ li .attributes {
 .rememberMe {
   margin-left: 5px;
 }
+
+.parallax-container {
+  height: "200px";
+}
