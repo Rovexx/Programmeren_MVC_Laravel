@@ -20,3 +20,6 @@ Route::get('/contact', 'PagesController@contact');
 
 // automatic routes for resources
 Route::resource('occasions', 'OccasionsController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
