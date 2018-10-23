@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
     <div class="row center">
@@ -112,5 +112,5 @@
 @stop
 
 @section('scripts')
-    <script type="text/javascript" src="{!! asset('js/materialize.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/forms.js') !!}"></script>
 @stop

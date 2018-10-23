@@ -1,7 +1,7 @@
 // select menus
 $(document).ready(function(){
     $('select').formSelect();
-  });
+});
 
 // autofill dropdown for gearbox
 $(function() {
