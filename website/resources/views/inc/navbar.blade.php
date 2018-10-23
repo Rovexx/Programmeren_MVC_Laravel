@@ -35,7 +35,3 @@
         </ul>
     </div>
 </nav>
-
-@section('scripts')
-    <script type="text/javascript" src="{!! asset('js/navbar.js') !!}"></script>
-@stop

@@ -12,7 +12,7 @@
 */
 
 // Homepage
-Route::get('/', 'PagesController@homepage');
+Route::get('/', 'PagesController@index');
 // Route page
 Route::get('/route', 'PagesController@route');
 // Contact page
@@ -24,4 +24,4 @@ Route::resource('occasions', 'OccasionsController');
 // Routes for the login system
 Auth::routes();
 // Homepage as logged in user
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'PagesController@index');

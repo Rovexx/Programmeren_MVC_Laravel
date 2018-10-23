@@ -13,3 +13,7 @@
     <script>M.toast({html: "{{ Session('error') }}", classes: 'red' })</script>
 @endif
 
+@if (Session::has('status'))
+    <script>M.toast({html: "{{ Session('status') }}", classes: 'green' })</script>
+@endif
+
