@@ -11,12 +11,12 @@
 |
 */
 
-// default homepage
-Route::get('/', function () {
-    return view('pages.homepage');
-});
+// homepage
+Route::get('/', 'PagesController@homepage');
+// route page
+Route::get('/route', 'PagesController@route');
+// contact page
+Route::get('/contact', 'PagesController@contact');
 
-// my homepage
-Route::get('/home', function () {
-    return view('layouts.master');
-});
+// automatic routes for resources
+Route::resource('occasions', 'OccasionsController');
