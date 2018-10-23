@@ -103,7 +103,8 @@ class OccasionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $occasion = Occasion::find($id);
+        return view('occasions.edit')->with('occasion', $occasion);
     }
 
     /**
@@ -115,7 +116,45 @@ class OccasionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate the form data that we got via POST request
+        $this->validate($request, [
+            'make' => 'required',
+            'model' => 'required',
+            'color' => 'required',
+            'year' => 'required',
+            'mileage' => 'required',
+            'fuel' => 'required',
+            'doors' => 'required',
+            'engineCapacity' => 'required',
+            'weight' => 'required',
+            'transmission' => 'required',
+            'gears' => 'required',
+            'plate' => 'required',
+            'price' => 'required'
+        ]);
+
+        // Create Occasion
+        $occasion = Occasion::find($id);
+        $occasion->make = $request->input('make');
+        $occasion->model = $request->input('model');
+        $occasion->color = $request->input('color');
+        $occasion->year = $request->input('year');
+        $occasion->mileage = $request->input('mileage');
+        $occasion->fuel = $request->input('fuel');
+        $occasion->doors = $request->input('doors');
+        $occasion->engineCapacity = $request->input('engineCapacity');
+        $occasion->weight = $request->input('weight');
+        $occasion->transmission = $request->input('transmission');
+        $occasion->gears = $request->input('gears');
+        $occasion->plate = $request->input('plate');
+        $occasion->price = $request->input('price');
+        $occasion->save();
+
+        // success message
+        Session::flash('success', 'Data geüpdatet');
+
+        //redirect
+        return redirect('/occasions');
     }
 
     /**
@@ -126,6 +165,13 @@ class OccasionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $occasion = Occasion::find($id);
+        $occasion->delete();
+
+        // success message
+        Session::flash('success', 'Auto verwijderd');
+
+        //redirect
+        return redirect('/occasions');
     }
 }
