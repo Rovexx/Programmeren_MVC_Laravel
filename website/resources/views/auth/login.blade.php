@@ -14,7 +14,7 @@
                 <!-- E-mail address -->
                 <div class="row">
                     <div class="input-field col s10 offset-s1">
-                        <i class="material-icons prefix">account_circle</i>
+                        <i class="material-icons prefix">email</i>
                         <input id="email" name="email" type="email" class="validate form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required autofocus>
                         <label for="email">{{ __('E-Mail Address') }}</label>
                     </div>
