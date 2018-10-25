@@ -4,9 +4,14 @@
         <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li><a href="/">Home</a></li>
             <li><a href="/occasions">Occasionoverzicht</a></li>
-            <li><a href="/occasions/create">Auto toevoegen</a></li>
             <li><a href="/route">Routebeschrijving</a></li>
             <li><a href="/contact">Contact</a></li>
+            <!-- as admin you can see the add car button -->
+            @if(!Auth::guest())
+                @if(Auth::user()->id == 1)
+                <li><a href="/occasions/create">Auto toevoegen</a></li>
+                @endif
+            @endif
         </ul>
         <ul class="right hide-on-med-and-down">
             <!-- Authentication Links -->
