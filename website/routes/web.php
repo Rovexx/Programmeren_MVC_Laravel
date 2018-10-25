@@ -11,12 +11,17 @@
 |
 */
 
-// homepage
-Route::get('/', 'PagesController@homepage');
-// route page
+// Homepage
+Route::get('/', 'PagesController@index');
+// Route page
 Route::get('/route', 'PagesController@route');
-// contact page
+// Contact page
 Route::get('/contact', 'PagesController@contact');
 
-// automatic routes for resources
+// Automatic routes for resources
 Route::resource('occasions', 'OccasionsController');
+
+// Routes for the login system
+Auth::routes();
+// Homepage as logged in user
+Route::get('/home', 'PagesController@index');

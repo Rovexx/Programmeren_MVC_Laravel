@@ -2,6 +2,7 @@
     <!-- ->all() erbij omdat errors een object is -->
     @foreach ($errors->all() as $error)
         <script>M.toast({html: "{{ $error }}", classes: 'red'})</script>
+        <script>console.log("first error")</script>
     @endforeach
 @endif
 
@@ -13,3 +14,12 @@
     <script>M.toast({html: "{{ Session('error') }}", classes: 'red' })</script>
 @endif
 
+<!-- session messages -->
+@if (Session::has('status'))
+    <script>M.toast({html: "{{ Session('status') }}", classes: 'green' })</script>
+@endif
+
+<!-- account activation link send -->
+@if (Session::has('resent'))
+    <script>M.toast({html: "{{ __('A fresh verification link has been sent to your email address.') }}", classes: 'green' })</script>
+@endif
