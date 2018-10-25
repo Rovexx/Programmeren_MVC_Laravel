@@ -6,15 +6,17 @@
         <h5>Vul de juiste gegevens in</h5>
     </div>
     <div class="row">
-        <div class="col s8 offset-s2 z-depth-1">
+        <div class="col s8 offset-s2 z-depth-1 white">
             <br><br>
-            <form class="col s12 white" action="{{ action('OccasionsController@store') }}" method="POST">
+            <form class="col s12" action="{{ action('OccasionsController@store') }}" method="POST">
                 @csrf
                 <div class="row">
+                    <!-- Make -->
                     <div class="input-field col s6">
                         <input placeholder="bv. Ferrari" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
+                    <!-- Model -->
                     <div class="input-field col s6">
                         <input placeholder="bv. 458 Italia" name="model" type="text" class="validate">
                         <label for="model">Model</label>
@@ -22,18 +24,22 @@
                 </div>
 
                 <div class="row">
+                    <!-- Color -->
                     <div class="input-field col s3">
                         <input placeholder="bv. Groen" name="color" type="text" class="validate">
                         <label for="color">Kleur</label>
                     </div>
+                    <!-- Year -->
                     <div class="input-field col s3">
                         <input placeholder="bv. 2004" name="year" type="number" min="1900" max="2100" class="validate">
                         <label for="year">Bouwjaar</label>
                     </div>
+                    <!-- Mileage -->
                     <div class="input-field col s3">
                         <input placeholder="bv. 114000" name="mileage" type="number" class="validate">
                         <label for="mileage">Kilometerstand</label>
                     </div>
+                    <!-- Fuel type -->
                     <div class="input-field col s3">
                         <select id="fuel" name="fuel">
                             <option value="" disabled selected>Kies type</option>
@@ -43,7 +49,7 @@
                         <label for="fuel">Benzine type</label>
                     </div>
                 </div>
-
+                <!-- Doors -->
                 <div class="row">
                     <div class="input-field col s3">
                         <select id="doors" name="doors">
@@ -57,15 +63,17 @@
                         </select>
                         <label for="doors">Aantal Deuren</label>
                     </div>
+                    <!-- Engine -->
                     <div class="input-field col s3">
                         <input placeholder="bv. 2.3" name="engineCapacity" type="number" step="0.1" class="validate">
                         <label for="engineCapacity">Motor inhoud</label>
                     </div>
+                    <!-- Weight -->
                     <div class="input-field col s3">
                         <input placeholder="bv. 1200" name="weight" type="number" class="validate">
                         <label for="weight">Gewicht</label>
                     </div>
-
+                    <!-- Transmissison -->
                     <div class="input-field col s2">
                         <select id="transmission" name="transmission">
                             <option value="" disabled selected>Kies soort</option>
@@ -75,6 +83,7 @@
                         </select>
                         <label for="transmission">Versnellingsbak</label>
                     </div>
+                    <!-- Gears -->
                     <div class="input-field col s1">
                         <select id="gears" name="gears">
                             <option value="" disabled selected></option>
@@ -89,10 +98,12 @@
                 </div>
 
                 <div class="row">
+                    <!-- Plate -->
                     <div class="input-field col s2">
                         <input placeholder="bv. 80-ZP-LT" name="plate" type="text" class="validate">
                         <label for="plate">Kenteken</label>
                     </div>
+                    <!-- Price -->
                     <div class="input-field col s2 offset-s4">
                         <input placeholder="bv. 256000" name="price" type="number" class="validate">
                         <label for="price">Prijs</label>

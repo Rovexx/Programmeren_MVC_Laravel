@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- transparant background for parallax -->
+    <style>main {background-color: #ffffff00;}</style>
     <!-- Parallax photo 1 -->
     <div class="parallax-container">
         <div class="parallax"><img src="{{ asset('images/Parallax (1).jpg') }}"></div>

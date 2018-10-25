@@ -8,7 +8,7 @@
         
         <div class="col s2 offset-s1">
             <!-- back button -->
-            <a href="/occasions" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Terug naar overzicht</a>
+            <a href="/occasions" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Terug</a>
         </div>
         <div class="col s8">
             <div class="col s2">
