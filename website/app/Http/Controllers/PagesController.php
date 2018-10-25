@@ -11,9 +11,10 @@ class PagesController extends Controller
      *
      * @return void
      */
+    // Redirect non-logged in users to login except for..
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 
     /**

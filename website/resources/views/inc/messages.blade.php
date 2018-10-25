@@ -14,7 +14,12 @@
     <script>M.toast({html: "{{ Session('error') }}", classes: 'red' })</script>
 @endif
 
-<!-- logged in status -->
+<!-- session messages -->
 @if (Session::has('status'))
     <script>M.toast({html: "{{ Session('status') }}", classes: 'green' })</script>
+@endif
+
+<!-- account activation link send -->
+@if (Session::has('resent'))
+    <script>M.toast({html: "{{ __('A fresh verification link has been sent to your email address.') }}", classes: 'green' })</script>
 @endif
