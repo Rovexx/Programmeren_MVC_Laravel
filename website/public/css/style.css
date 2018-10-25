@@ -22,8 +22,20 @@ li .row {
   margin: 0px;
 }
 
-li .attributes {
+.bold {
   font-weight: 600;
+}
+
+.thin h6 {
+  font-weight: 200;
+  font-size: 1em;
+  margin: 5px;
+}
+
+.normal h6 {
+  font-weight: 400;
+  font-size: 1em;
+  margin: 5px;
 }
 
 .rememberMe {

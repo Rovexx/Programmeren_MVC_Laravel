@@ -22,7 +22,7 @@
         <!-- navbar -->
         @include('inc.navbar')      
         <!-- content -->
-        <main>
+        <main class="grey lighten-5">
             @yield('content')
         </main>
 

@@ -42,6 +42,12 @@ class OccasionsController extends Controller
      */
     public function create()
     {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
         return view('occasions.create');
     }
 
@@ -115,6 +121,12 @@ class OccasionsController extends Controller
     public function edit($id)
     {
         $occasion = Occasion::find($id);
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
         return view('occasions.edit')->with('occasion', $occasion);
     }
 
@@ -178,7 +190,13 @@ class OccasionsController extends Controller
     {
         $occasion = Occasion::find($id);
         $occasion->delete();
-
+        
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
         // success message
         Session::flash('success', 'Auto verwijderd');
 
