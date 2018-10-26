@@ -75,11 +75,11 @@ class OccasionsController extends Controller
             'price' => 'required',
             'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
         ]);
-        // Put the images from the POST data inside an array
-        $files = $request->file('images');
         // Handle file uploads
         if($request->hasFile('images'))
         {
+            // Put the images from the POST data inside an array
+            $files = $request->file('images');
             foreach($files as $image)
             {
                 // Get filename with the extension
@@ -177,9 +177,30 @@ class OccasionsController extends Controller
             'transmission' => 'required',
             'gears' => 'required',
             'plate' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
         ]);
+        // Handle file uploads
+        if($request->hasFile('images'))
+        {
+            // Put the images from the POST data inside an array
+            $files = $request->file('images');
 
+            foreach($files as $image)
+            {
+                // Get filename with the extension
+                $filenameWithExt = $image->getClientOriginalName();
+                // Get just the filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just the extension
+                $extension = $image->getClientOriginalExtension();
+                // Filename to store
+                $filenameToStore = $filename.'.'.time().'.'.$extension;
+                // Upload Image
+                $path = $image->storeAs('public/car_images', $filenameToStore);
+                $data[] = $filenameToStore;
+            }
+        }
         // Create Occasion
         $occasion = Occasion::find($id);
         $occasion->make = $request->input('make');
@@ -195,6 +216,11 @@ class OccasionsController extends Controller
         $occasion->gears = $request->input('gears');
         $occasion->plate = $request->input('plate');
         $occasion->price = $request->input('price');
+        if($request->hasFile('images'))
+        {
+            // save image name as json
+            $occasion->image_name = json_encode($data);
+        }
         $occasion->save();
 
         // success message
@@ -213,14 +239,15 @@ class OccasionsController extends Controller
     public function destroy($id)
     {
         $occasion = Occasion::find($id);
-        $occasion->delete();
-        
+
         // check for admin rights
         if(auth()->user()->id !== 1){
             // error message
             Session::flash('error', 'Onbevoegde toegang');
             return redirect('/home');
         }
+
+        $occasion->delete();
         // success message
         Session::flash('success', 'Auto verwijderd');
 

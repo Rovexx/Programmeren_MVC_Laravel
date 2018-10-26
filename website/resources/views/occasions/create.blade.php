@@ -9,6 +9,7 @@
         <div class="col s8 offset-s2 z-depth-1 white">
             <br><br>
             <form class="col s12" action="{{ action('OccasionsController@store') }}" method="POST" enctype="multipart/form-data">
+                <!-- CSRF Protection -->
                 @csrf
                 <div class="row">
                     <!-- Make -->
@@ -108,7 +109,7 @@
                         <input placeholder="bv. 256000" name="price" type="number" class="validate">
                         <label for="price">Prijs</label>
                     </div>
-                    <!-- afbeelding uploaden -->
+                    <!-- Upload picture -->
                     <div class="file-field input-field col s6">
                         <div class="btn amber">
                             <span>Bestand</span>
@@ -118,13 +119,20 @@
                             <input class="file-path validate" type="text" placeholder="Upload een of meer foto's">
                         </div>
                     </div>
-                </div>  
+                </div>
                 
                 <div class="row">
-                    <div class="center">
-                        <button class="btn waves-effect waves-light yellow darken-2 z-depth-1" type="submit" name="submit">Aanmaken
-                            <i class="material-icons right">send</i>
-                        </button>
+                    <!-- back button -->
+                    <div class="col s2">
+                        <a href="/occasions" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Annuleren</a>
+                    </div>
+                    <!-- submit button -->
+                    <div class="col s2 offset-s8">
+                        <div class="center">
+                            <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Aanmaken
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
