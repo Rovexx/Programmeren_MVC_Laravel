@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Occasion;
 use Session;
+use Illuminate\Support\Facades\Storage;
 
 class OccasionsController extends Controller
 {
@@ -26,12 +27,11 @@ class OccasionsController extends Controller
      */
     public function index()
     {
-        // fetch all the data from the model
-        //$occasions = Occasion::orderBy('make', 'asc')->get();
-
+        // fetch all the data from the model, ordered ascending and paginate it for 15 per page
         $occasions = Occasion::orderBy('make', 'asc')->Paginate(15);
         // controleren op post data en dan filteren
         // $occasions = Occasion::where('name', 'data uit post')->get();
+        
         return view('occasions.index')->with('occasions', $occasions);
     }
 
@@ -73,9 +73,33 @@ class OccasionsController extends Controller
             'transmission' => 'required',
             'gears' => 'required',
             'plate' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
         ]);
-
+        // Handle file uploads
+        if($request->hasFile('images'))
+        {
+            // Put the images from the POST data inside an array
+            $files = $request->file('images');
+            foreach($files as $image)
+            {
+                // Get filename with the extension
+                $filenameWithExt = $image->getClientOriginalName();
+                // Get just the filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just the extension
+                $extension = $image->getClientOriginalExtension();
+                // Filename to store
+                $filenameToStore = $filename.'.'.time().'.'.$extension;
+                // Upload Image
+                $path = $image->storeAs('public/car_images', $filenameToStore);
+                $data[] = $filenameToStore;
+            }
+        }
+        // If no images where uploaded add default image
+        else {
+            $data = ["noimage.png"];
+        }
         // Create Occasion
         $occasion = new Occasion;
         $occasion->make = $request->input('make');
@@ -91,8 +115,9 @@ class OccasionsController extends Controller
         $occasion->gears = $request->input('gears');
         $occasion->plate = $request->input('plate');
         $occasion->price = $request->input('price');
+        // save image name as json
+        $occasion->image_name = json_encode($data);
         $occasion->save();
-
         // success message
         Session::flash('success', 'Auto Toegevoegd');
 
@@ -139,6 +164,8 @@ class OccasionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Get current occasion info
+        $occasion = Occasion::find($id);
         // validate the form data that we got via POST request
         $this->validate($request, [
             'make' => 'required',
@@ -153,11 +180,45 @@ class OccasionsController extends Controller
             'transmission' => 'required',
             'gears' => 'required',
             'plate' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
         ]);
+        // Handle file uploads
+        if($request->hasFile('images'))
+        {
+            // First delete the old images
+            // If the occasion does not have the default image
+            if($occasion->image_name !== '["noImage.png"]'){
+                //convert from json
+                $convertedImages = json_decode($occasion->image_name);
+                // Delete all images
+                foreach($convertedImages as $image)
+                {
+                    // Delete image
+                    Storage::delete('public/car_images/'.$image);
+                }
+            }
 
-        // Create Occasion
-        $occasion = Occasion::find($id);
+            // Add the new images
+            // Put the images from the POST data inside an array
+            $files = $request->file('images');
+
+            foreach($files as $image)
+            {
+                // Get filename with the extension
+                $filenameWithExt = $image->getClientOriginalName();
+                // Get just the filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just the extension
+                $extension = $image->getClientOriginalExtension();
+                // Filename to store
+                $filenameToStore = $filename.'.'.time().'.'.$extension;
+                // Upload Image
+                $path = $image->storeAs('public/car_images', $filenameToStore);
+                $data[] = $filenameToStore;
+            }
+        }
+        // Update the info
         $occasion->make = $request->input('make');
         $occasion->model = $request->input('model');
         $occasion->color = $request->input('color');
@@ -171,6 +232,11 @@ class OccasionsController extends Controller
         $occasion->gears = $request->input('gears');
         $occasion->plate = $request->input('plate');
         $occasion->price = $request->input('price');
+        if($request->hasFile('images'))
+        {
+            // save image name as json
+            $occasion->image_name = json_encode($data);
+        }
         $occasion->save();
 
         // success message
@@ -189,14 +255,27 @@ class OccasionsController extends Controller
     public function destroy($id)
     {
         $occasion = Occasion::find($id);
-        $occasion->delete();
-        
+
         // check for admin rights
         if(auth()->user()->id !== 1){
             // error message
             Session::flash('error', 'Onbevoegde toegang');
             return redirect('/home');
         }
+
+        // If the occasion does not have the default image
+        if($occasion->image_name !== '["noImage.png"]'){
+            //convert from json
+            $convertedImages = json_decode($occasion->image_name);
+            // Delete all images
+            foreach($convertedImages as $image)
+            {
+                // Delete image
+                Storage::delete('public/car_images/'.$image);
+            }
+        }
+
+        $occasion->delete();
         // success message
         Session::flash('success', 'Auto verwijderd');
 

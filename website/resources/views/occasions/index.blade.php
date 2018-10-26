@@ -52,7 +52,10 @@
                 <li class="collection-item">
                     <div class="row">
                         <div class="col s3">
-                            <img src="{{ asset('images/Auto (1).jpg') }}" class="responsive-img z-depth-1">
+                            @foreach($image = json_decode($occasion->image_name) as $image)
+                                <img src="/storage/car_images/{{$image}}" class="responsive-img z-depth-1">
+                                @break
+                            @endforeach
                         </div>
                         <div class="col s9">
                             <div class="row">

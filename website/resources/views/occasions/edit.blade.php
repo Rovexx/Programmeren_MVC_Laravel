@@ -6,18 +6,20 @@
         <h5>Vul de juiste gegevens in</h5>
     </div>
     <div class="row">
-        <div class="col s8 offset-s2 z-depth-1">
+        <div class="col s8 offset-s2 z-depth-1 white">
             <br><br>
-            <form class="col s12 white" action="{{ action('OccasionsController@update', $occasion->id) }}" method="POST">
+            <form class="col s12" action="{{ action('OccasionsController@update', $occasion->id) }}" method="POST" enctype="multipart/form-data">
                 <!-- CSRF Protection -->
                 @csrf
                 <!-- PUT method instead of POST for the update request -->
                 <input name="_method" type="hidden" value="PUT">
                 <div class="row">
+                    <!-- Make -->
                     <div class="input-field col s6">
-                    <input value="{{$occasion->make}}" placeholder="bv. Ferrari" name="make" type="text" class="validate">
+                        <input value="{{$occasion->make}}" placeholder="bv. Ferrari" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
+                    <!-- Model -->
                     <div class="input-field col s6">
                         <input value="{{$occasion->model}}" placeholder="bv. 458 Italia" name="model" type="text" class="validate">
                         <label for="model">Model</label>
@@ -25,18 +27,22 @@
                 </div>
 
                 <div class="row">
+                    <!-- Color -->
                     <div class="input-field col s3">
                         <input value="{{$occasion->color}}" placeholder="bv. Groen" name="color" type="text" class="validate">
                         <label for="color">Kleur</label>
                     </div>
+                    <!-- Year -->
                     <div class="input-field col s3">
                         <input value="{{$occasion->year}}" placeholder="bv. 2004" name="year" type="number" min="1900" max="2100" class="validate">
                         <label for="year">Bouwjaar</label>
                     </div>
+                    <!-- Mileage -->
                     <div class="input-field col s3">
                         <input value="{{$occasion->mileage}}" placeholder="bv. 114000" name="mileage" type="number" class="validate">
                         <label for="mileage">Kilometerstand</label>
                     </div>
+                    <!-- Fuel type -->
                     <div class="input-field col s3">
                         <select id="fuel" name="fuel">
                             <option value="" disabled selected>Kies type</option>
@@ -47,6 +53,7 @@
                     </div>
                 </div>
 
+                <!-- Doors -->
                 <div class="row">
                     <div class="input-field col s3">
                         <select id="doors" name="doors">
@@ -60,15 +67,17 @@
                         </select>
                         <label for="doors">Aantal Deuren</label>
                     </div>
+                    <!-- Engine -->
                     <div class="input-field col s3">
                         <input value="{{$occasion->engineCapacity}}" placeholder="bv. 2.3" name="engineCapacity" type="number" step="0.1" class="validate">
                         <label for="engineCapacity">Motor inhoud</label>
                     </div>
+                    <!-- Weight -->
                     <div class="input-field col s3">
                         <input value="{{$occasion->weight}}" placeholder="bv. 1200" name="weight" type="number" class="validate">
                         <label for="weight">Gewicht</label>
                     </div>
-
+                    <!-- Transmissison -->
                     <div class="input-field col s2">
                         <select id="transmission" name="transmission">
                             <option value="" disabled selected>Kies soort</option>
@@ -78,6 +87,7 @@
                         </select>
                         <label for="transmission">Versnellingsbak</label>
                     </div>
+                    <!-- Gears -->
                     <div class="input-field col s1">
                         <select id="gears" name="gears">
                             <option value="" disabled selected></option>
@@ -92,23 +102,42 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s2">
+                    <!-- Plate -->
+                    <div class="input-field col s3">
                         <input value="{{$occasion->plate}}" placeholder="bv. 80-ZP-LT" name="plate" type="text" class="validate">
                         <label for="plate">Kenteken</label>
                     </div>
-                    <div class="input-field col s2 offset-s4">
+                    <!-- Price -->
+                    <div class="input-field col s3">
                         <input value="{{$occasion->price}}" placeholder="bv. 256000" name="price" type="number" class="validate">
                         <label for="price">Prijs</label>
                     </div>
-                </div>  
-                
-                <div class="row">
-                    <div class="center">
-                        <button class="btn waves-effect waves-light yellow darken-2 z-depth-1" type="submit" name="submit">Add
-                            <i class="material-icons right">send</i>
-                        </button>
+                    <!-- Picture -->
+                    <div class="file-field input-field col s6">
+                        <div class="btn amber">
+                            <span>Bestand</span>
+                            <input name="images[]" type="file" multiple>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload een of meer foto's">
+                        </div>
                     </div>
                 </div>
+
+                <div class="row">
+                        <!-- back button -->
+                        <div class="col s2">
+                            <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Annuleren</a>
+                        </div>
+                        <!-- submit button -->
+                        <div class="col s2 offset-s8">
+                            <div class="center">
+                                <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Bijwerken
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
             </form>
         </div>
     </div>
