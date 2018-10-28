@@ -113,7 +113,7 @@ class OccasionsController extends Controller
             'gears' => 'required|numeric',
             'plate' => 'required',
             'price' => 'required|numeric',
-            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000'
         ]);
         // Handle file uploads
         if($request->hasFile('images'))
@@ -220,7 +220,7 @@ class OccasionsController extends Controller
             'gears' => 'required',
             'plate' => 'required',
             'price' => 'required',
-            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000'
         ]);
         // Handle file uploads
         if($request->hasFile('images'))
