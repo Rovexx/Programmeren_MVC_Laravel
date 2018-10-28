@@ -21,17 +21,56 @@ class OccasionsController extends Controller
     }
     
     /**
-     * Display a listing of the resource.
+     * Display the occasions and filter the data.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // fetch all the data from the model, ordered ascending and paginate it for 15 per page
-        $occasions = Occasion::orderBy('make', 'asc')->Paginate(15);
-        // controleren op post data en dan filteren
-        // $occasions = Occasion::where('name', 'data uit post')->get();
+        // valide the filter form data
+        $this->validate($request, [
+            'searchBar' => 'nullable|string',
+            'make' => 'nullable|string',
+            'color' => 'nullable|string',
+            'year' => 'nullable|numeric|gte:1900|lte:2100',
+            'transmission' => 'nullable|boolean',
+            'priceMin' => 'nullable|numeric|gte:0',
+            'priceMax' => 'nullable|numeric|'
+        ]);
         
+        // Check for the filter post data and filter if needed
+        $occasions = (new Occasion)->newQuery();
+        // !!! filter every field on search bar
+        // If a make is provided
+        if($request->input('make')){
+            $occasions->where('make', $request->input('make'));
+        }
+        // If a color is provided
+        if($request->input('color')){
+            $occasions->where('color', $request->input('color'));
+        }
+        // If a year is provided
+        if($request->input('year')){
+            $occasions->where('year', $request->input('year'));
+        }
+        // If a transmissiontype is provided
+        if($request->input('transmission')){
+            $occasions->where('transmission', 'Automaat');
+        }
+        // If a min price is provided
+        if($request->input('priceMin')){
+            $occasions->where('price', '>=', $request->input('priceMin'));
+        }
+        // If a max price is provided
+        if($request->input('priceMax')){
+            $occasions->where('price', '<=', $request->input('priceMax'));
+        }
+        // Order results by make ascending and paginate to 15 per page
+        $occasions->orderBy('make', 'asc')->Paginate(15);
+        // Get the results
+        $occasions = $occasions->get();
+        // Pass the results to the view
         return view('occasions.index')->with('occasions', $occasions);
     }
 
@@ -64,16 +103,16 @@ class OccasionsController extends Controller
             'make' => 'required',
             'model' => 'required',
             'color' => 'required',
-            'year' => 'required',
-            'mileage' => 'required',
+            'year' => 'required|numeric',
+            'mileage' => 'required|numeric',
             'fuel' => 'required',
-            'doors' => 'required',
-            'engineCapacity' => 'required',
-            'weight' => 'required',
+            'doors' => 'required|numeric',
+            'engineCapacity' => 'required|numeric',
+            'weight' => 'required|numeric',
             'transmission' => 'required',
-            'gears' => 'required',
+            'gears' => 'required|numeric',
             'plate' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:10000'
         ]);
         // Handle file uploads

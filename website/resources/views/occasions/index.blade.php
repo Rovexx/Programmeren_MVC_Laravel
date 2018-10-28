@@ -3,46 +3,75 @@
 @section('content')
     <div class="row">
         <!-- Filter menu -->
-        <div class="col s3">
-            <form class="" action="/occasion/list-occasions">
+        <div class="col s3 white z-depth-1">
+            <form action="/occasions/search" method="POST">
+                <!-- CSRF Protection -->
                 @csrf
+                <!-- Searchbar -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input name="make" type="text">
+                        <i class="material-icons prefix">search</i>
+                        <input placeholder="bv. Ferrari 458" name="searchBar" type="text" class="validate">
+                        <label for="icon_prefix2">Zoeken</label>
+                    </div>
+                </div>
+                <!-- Make -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="bv. Ferrari" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
                 </div>
+                <!-- Color -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input name="model" type="text">
-                        <label for="model">Model</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input name="color" type="text" >
+                        <input placeholder="bv. Groen" name="color" type="text" class="validate">
                         <label for="color">Kleur</label>
                     </div>
                 </div>
+                <!-- Year -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input name="year" type="text">
+                        <input placeholder="bv. 2004" name="year" type="number" min="1900" max="2100" class="validate">
                         <label for="year">Bouwjaar</label>
                     </div>
                 </div>
-
-                <!-- submit button -->
+                <!-- Transmission type -->
                 <div class="row">
-                    <div class="center">
-                        <button class="btn waves-effect waves-light yellow darken-2 z-depth-1" type="submit" name="submit">Add
-                            <i class="material-icons right">send</i>
-                        </button>
+                    <div class="col s12">
+                        <label>
+                            <input name="transmission" type="checkbox" class="filled-in"/>
+                            <span>Alleen Automaat</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Price range -->
+                <div class="row">
+                    <div class="col s12">
+                        <h5>Prijs</h5>
+                        <div class="col s5">
+                            <input placeholder="Min" name="priceMin" type="number" class="validate">
+                        </div>
+                        <h5 class="col s2 center"> - </h5>
+                        <div class="col s5">
+                            <input placeholder="Max" name="priceMax" type="number" class="validate">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <!-- submit button -->
+                    <div class="col s12">
+                        <div class="center">
+                            <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Zoeken
+                                <i class="material-icons right">search</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        
         <!-- Car listings -->
         <div class="col s9 right">
             <ul class="collection">
@@ -99,9 +128,17 @@
                     </div>  
                 </li>
                 @endforeach
-                {{ $occasions->links() }}
                 @else
-                    <li><h6>Geen occasions</h6></li>
+                <li class="collection-item">
+                    <div class="row">
+                        <div class="col s12">
+                            <h4>Geen zoekresulaten</h4>
+                            <hr>
+                            <h3>Helaas, Uw zoekopdracht heeft geen resultaten opgeleverd</h3>
+                            <h5>Probeer het nog een keer met andere zoektermen</h5>
+                        </div>
+                    </div>
+                </li>
                 @endif
             </ul>
         </div>
@@ -109,5 +146,5 @@
 @stop
 
 @section('scripts')
-    <script type="text/javascript" src="{!! asset('js/materialize.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/forms.js') !!}"></script>
 @stop
