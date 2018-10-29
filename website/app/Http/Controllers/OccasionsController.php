@@ -39,9 +39,23 @@ class OccasionsController extends Controller
             'priceMax' => 'nullable|numeric|'
         ]);
         
+        // Save the search data for autofill on refresh
+        //$searchData[] = $request->input(['searchBar', 'make', 'color', 'year', 'transmission', 'priceMin', 'priceMax']);
+            echo '<pre>';
+            echo $request->input(['searchBar', 'make']);
+            echo '</pre>';
         // Check for the filter post data and filter if needed
         $occasions = (new Occasion)->newQuery();
-        // !!! filter every field on search bar
+
+        // If the searchbar is filled in check every column in database
+        if($request->input('searchBar')){
+            // Get all column names
+            $columns = ['make', 'model', 'color', 'year', 'mileage', 'fuel', 'doors', 'engineCapacity', 'weight', 'transmission', 'gears', 'plate', 'price'];
+            // Search in columns for matching data
+            foreach($columns as $column){
+                $occasions->orWhere($column, 'LIKE', '%' . $request->input('searchBar') . '%');
+            }
+        }
         // If a make is provided
         if($request->input('make')){
             $occasions->where('make', $request->input('make'));
@@ -66,12 +80,13 @@ class OccasionsController extends Controller
         if($request->input('priceMax')){
             $occasions->where('price', '<=', $request->input('priceMax'));
         }
+        
         // Order results by make ascending and paginate to 15 per page
         $occasions->orderBy('make', 'asc')->Paginate(15);
         // Get the results
         $occasions = $occasions->get();
         // Pass the results to the view
-        return view('occasions.index')->with('occasions', $occasions);
+        return view('occasions.index')->with('occasions', $occasions);//->with('searchData', $searchData);
     }
 
     /**

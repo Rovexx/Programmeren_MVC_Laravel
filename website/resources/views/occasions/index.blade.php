@@ -18,7 +18,7 @@
                 <!-- Make -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="bv. Ferrari" name="make" type="text" class="validate">
+                        <input value="" placeholder="bv. Ferrari" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
                 </div>

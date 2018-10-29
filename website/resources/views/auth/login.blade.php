@@ -24,7 +24,7 @@
                     <div class="input-field col s10 offset-s1">
                         <i class="material-icons prefix">https</i>
                         <input id="password" name="password" type="password" class="validate form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
-                        <label for="wachtwoord">{{ __('Password') }}</label>
+                        <label for="password">{{ __('Password') }}</label>
                     </div>
                 </div>
                 <!-- remember me -->
