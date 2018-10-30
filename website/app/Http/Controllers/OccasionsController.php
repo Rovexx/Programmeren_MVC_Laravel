@@ -36,14 +36,10 @@ class OccasionsController extends Controller
             'year' => 'nullable|numeric|gte:1900|lte:2100',
             'transmission' => 'nullable|boolean',
             'priceMin' => 'nullable|numeric|gte:0',
-            'priceMax' => 'nullable|numeric|'
+            'priceMax' => 'nullable|numeric'
         ]);
         
-        // Save the search data for autofill on refresh
-        //$searchData[] = $request->input(['searchBar', 'make', 'color', 'year', 'transmission', 'priceMin', 'priceMax']);
-            echo '<pre>';
-            echo $request->input(['searchBar', 'make']);
-            echo '</pre>';
+        //return $searchData;
         // Check for the filter post data and filter if needed
         $occasions = (new Occasion)->newQuery();
 
@@ -85,8 +81,10 @@ class OccasionsController extends Controller
         $occasions->orderBy('make', 'asc')->Paginate(15);
         // Get the results
         $occasions = $occasions->get();
+        // pass old input data to session
+        $request->flash();
         // Pass the results to the view
-        return view('occasions.index')->with('occasions', $occasions);//->with('searchData', $searchData);
+        return view('occasions.index')->with('occasions', $occasions);
     }
 
     /**
