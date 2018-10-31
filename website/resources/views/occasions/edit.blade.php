@@ -39,7 +39,7 @@
                     </div>
                     <!-- Mileage -->
                     <div class="input-field col s3">
-                        <input value="{{$occasion->mileage}}" placeholder="bv. 114000" name="mileage" type="number" class="validate">
+                        <input value="{{$occasion->mileage}}" placeholder="bv. 114000" name="mileage" type="number" min="0" class="validate">
                         <label for="mileage">Kilometerstand</label>
                     </div>
                     <!-- Fuel type -->
@@ -74,7 +74,7 @@
                     </div>
                     <!-- Weight -->
                     <div class="input-field col s3">
-                        <input value="{{$occasion->weight}}" placeholder="bv. 1200" name="weight" type="number" class="validate">
+                        <input value="{{$occasion->weight}}" placeholder="bv. 1200" name="weight" type="number" min="0" class="validate">
                         <label for="weight">Gewicht</label>
                     </div>
                     <!-- Transmissison -->

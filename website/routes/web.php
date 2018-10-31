@@ -12,7 +12,9 @@
 */
 
 // Homepage
-Route::get('/', 'PagesController@index');
+Route::get('/', 'PagesController@home');
+// Homepage
+Route::get('/home', 'PagesController@home');
 // Route page
 Route::get('/route', 'PagesController@route');
 // Contact page
@@ -20,8 +22,10 @@ Route::get('/contact', 'PagesController@contact');
 
 // Automatic routes for resources
 Route::resource('occasions', 'OccasionsController');
+// Post route for filtering occasions
+Route::post('/occasions/search', 'OccasionsController@index');
+
 
 // Routes for the login system
 Auth::routes();
-// Homepage as logged in user
-Route::get('/home', 'PagesController@index');
+

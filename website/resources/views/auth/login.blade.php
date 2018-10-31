@@ -23,15 +23,15 @@
                 <div class="row">
                     <div class="input-field col s10 offset-s1">
                         <i class="material-icons prefix">https</i>
-                        <input id="password" name="password" type="password" class="validate form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
-                        <label for="wachtwoord">{{ __('Password') }}</label>
+                        <input id="password" name="password" type="password" class="validate form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required>
+                        <label for="password">{{ __('Password') }}</label>
                     </div>
                 </div>
                 <!-- remember me -->
                 <div class="row">
                     <div class="col s10 offset-s1">
                         <label for="remember" class="rememberMe">
-                            <input id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }} class="filled-in"/>
+                            <input id="remember" name="remember" type="checkbox" value="{{ old('remember') ? 'checked' : '' }}" class="filled-in"/>
                             <span>{{ __('Remember Me') }}</span>
                         </label>
                     </div>

@@ -16,7 +16,7 @@
                     <div class="input-field col s10 offset-s1">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="name" name="name" type="text" class="validate form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" required autofocus>
-                        <label for="Name">{{ __('Name') }}</label>
+                        <label for="name">{{ __('Name') }}</label>
                     </div>
                 </div>
                 <!-- E-mail address -->
@@ -24,7 +24,7 @@
                     <div class="input-field col s10 offset-s1">
                         <i class="material-icons prefix">email</i>
                         <input id="email" name="email" type="email" class="validate form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required>
-                        <label for="E-mail">{{ __('E-Mail Address') }}</label>
+                        <label for="email">{{ __('E-Mail Address') }}</label>
                     </div>
                 </div>
                 <!-- Password -->
@@ -32,7 +32,7 @@
                     <div class="input-field col s10 offset-s1">
                         <i class="material-icons prefix">enhanced_encryption</i>
                         <input id="password" name="password" type="password" class="validate form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
-                        <label for="wachtwoord">{{ __('Password') }}</label>
+                        <label for="password">{{ __('Password') }}</label>
                     </div>
                 </div>
                 <!-- Password confirm -->
