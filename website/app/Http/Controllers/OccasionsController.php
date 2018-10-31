@@ -198,6 +198,13 @@ class OccasionsController extends Controller
      */
     public function edit($id)
     {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
+
         $occasion = Occasion::find($id);
         // check for admin rights
         if(auth()->user()->id !== 1){
@@ -217,6 +224,12 @@ class OccasionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
         // Get current occasion info
         $occasion = Occasion::find($id);
         // validate the form data that we got via POST request
@@ -308,15 +321,14 @@ class OccasionsController extends Controller
      */
     public function destroy($id)
     {
-        $occasion = Occasion::find($id);
-
         // check for admin rights
         if(auth()->user()->id !== 1){
             // error message
             Session::flash('error', 'Onbevoegde toegang');
             return redirect('/home');
         }
-
+        // Get the occasion with the right id
+        $occasion = Occasion::find($id);
         // If the occasion does not have the default image
         if($occasion->image_name !== '["noImage.png"]'){
             //convert from json
@@ -346,6 +358,12 @@ class OccasionsController extends Controller
      */
     public function changeStatus(Request $request)
     {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
         // validate the form data that we got via POST request
         $this->validate($request, [
             'status' => 'nullable|string',
