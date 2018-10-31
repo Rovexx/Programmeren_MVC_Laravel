@@ -24,7 +24,8 @@ Route::get('/contact', 'PagesController@contact');
 Route::resource('occasions', 'OccasionsController');
 // Post route for filtering occasions
 Route::post('/occasions/search', 'OccasionsController@index');
-
+// Route to change occasion status function admin
+Route::post('/occasions/changeStatus', 'OccasionsController@changeStatus');
 
 // Routes for the login system
 Auth::routes();

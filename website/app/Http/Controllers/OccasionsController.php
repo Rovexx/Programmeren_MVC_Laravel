@@ -169,6 +169,7 @@ class OccasionsController extends Controller
         $occasion->price = $request->input('price');
         // save image name as json
         $occasion->image_name = json_encode($data);
+        $occasion->old_price = $request->input('price');
         $occasion->save();
         // success message
         Session::flash('success', 'Auto Toegevoegd');
@@ -289,6 +290,7 @@ class OccasionsController extends Controller
             // save image name as json
             $occasion->image_name = json_encode($data);
         }
+        $occasion->old_price = $request->input('price');
         $occasion->save();
 
         // success message
@@ -333,5 +335,48 @@ class OccasionsController extends Controller
 
         //redirect
         return redirect('/occasions');
+    }
+
+    /**
+     * Toggle occasion status as admin.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changeStatus(Request $request)
+    {
+        // validate the form data that we got via POST request
+        $this->validate($request, [
+            'status' => 'nullable|string',
+            'id' => 'required|numeric'
+        ]);
+        // Get id  of current car we are changing
+        $id = $request->input('id');
+        // Get current occasion info
+        $occasion = Occasion::find($id);
+        
+        // if the car is sold 
+        if($request->input('status') == ''){
+            //set old price
+            $occasion->old_price = $occasion->price;
+            // change to sold
+            $occasion->price = 'Verkocht';
+        } 
+        // if the car is available
+        else if($request->input('status') == 'on'){
+            //set to old price
+            $occasion->price = $occasion->old_price;
+        }
+
+        // Save changes to database
+        $occasion->save();
+
+        // success message
+        Session::flash('success', 'Status geüpdatet');
+
+        //redirect
+        return $this->show($id);
+        
     }
 }
