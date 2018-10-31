@@ -113,20 +113,21 @@ class OccasionsController extends Controller
     {
         // validate the form data that we got via POST request
         $this->validate($request, [
-            'make' => 'required',
-            'model' => 'required',
-            'color' => 'required',
+            'make' => 'required|string',
+            'model' => 'required|string',
+            'color' => 'required|string',
             'year' => 'required|numeric',
             'mileage' => 'required|numeric',
-            'fuel' => 'required',
+            'fuel' => 'required|string',
             'doors' => 'required|numeric',
             'engineCapacity' => 'required|numeric',
             'weight' => 'required|numeric',
-            'transmission' => 'required',
+            'transmission' => 'required|string',
             'gears' => 'required|numeric',
-            'plate' => 'required',
+            'plate' => 'required|string',
             'price' => 'required|numeric',
-            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000'
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000',
+            'extras' => 'nullable|string'
         ]);
         // Handle file uploads
         if($request->hasFile('images'))
@@ -170,6 +171,7 @@ class OccasionsController extends Controller
         // save image name as json
         $occasion->image_name = json_encode($data);
         $occasion->old_price = $request->input('price');
+        $occasion->extras = $request->input('extras');
         $occasion->save();
         // success message
         Session::flash('success', 'Auto Toegevoegd');
@@ -234,20 +236,21 @@ class OccasionsController extends Controller
         $occasion = Occasion::find($id);
         // validate the form data that we got via POST request
         $this->validate($request, [
-            'make' => 'required',
-            'model' => 'required',
-            'color' => 'required',
-            'year' => 'required',
-            'mileage' => 'required',
-            'fuel' => 'required',
-            'doors' => 'required',
-            'engineCapacity' => 'required',
-            'weight' => 'required',
-            'transmission' => 'required',
-            'gears' => 'required',
-            'plate' => 'required',
-            'price' => 'required',
-            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000'
+            'make' => 'required|string',
+            'model' => 'required|string',
+            'color' => 'required|string',
+            'year' => 'required|numeric',
+            'mileage' => 'required|numeric',
+            'fuel' => 'required|string',
+            'doors' => 'required|numeric',
+            'engineCapacity' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'transmission' => 'required|string',
+            'gears' => 'required|numeric',
+            'plate' => 'required|string',
+            'price' => 'required|numeric',
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000',
+            'extras' => 'nullable|string'
         ]);
         // Handle file uploads
         if($request->hasFile('images'))
@@ -304,6 +307,7 @@ class OccasionsController extends Controller
             $occasion->image_name = json_encode($data);
         }
         $occasion->old_price = $request->input('price');
+        $occasion->extras = $request->input('extras');
         $occasion->save();
 
         // success message

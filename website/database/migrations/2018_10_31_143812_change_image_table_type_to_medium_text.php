@@ -13,8 +13,8 @@ class ChangeImageTableTypeToMediumText extends Migration
      */
     public function up()
     {
-        Schema::table('occasions', function (Blueprint $table) {
-        $table->mediumText('image_name', 255)->change();
+        Schema::table('occasions', function ($table) {
+            $table->mediumText('image_name', 255)->change();
         });
     }
 
@@ -25,8 +25,8 @@ class ChangeImageTableTypeToMediumText extends Migration
      */
     public function down()
     {
-        Schema::table('occasions', function (Blueprint $table) {
-        $table->string('image_name')->change();
+        Schema::table('occasions', function ($table) {
+            $table->string('image_name')->change();
         });
     }
 }
