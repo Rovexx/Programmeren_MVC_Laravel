@@ -34,7 +34,7 @@ class OccasionsController extends Controller
             'make' => 'nullable|string',
             'color' => 'nullable|string',
             'year' => 'nullable|numeric|gte:1900|lte:2100',
-            'transmission' => 'nullable|boolean',
+            'transmission' => 'nullable',
             'priceMin' => 'nullable|numeric|gte:0',
             'priceMax' => 'nullable|numeric'
         ]);

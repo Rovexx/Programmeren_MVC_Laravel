@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col s12">
                         <label>
-                            <input value="{{ old('transmission') ? 'checked' : '' }}" name="transmission" type="checkbox" class="filled-in"/>
+                            <input {{ (old('transmission') == 'on') ? "checked" : "" }} id="transmission" name="transmission" type="checkbox" class="filled-in"/>
                             <span>Alleen Automaat</span>
                         </label>
                     </div>
