@@ -34,7 +34,7 @@ class OccasionsController extends Controller
             'make' => 'nullable|string',
             'color' => 'nullable|string',
             'year' => 'nullable|numeric|gte:1900|lte:2100',
-            'transmission' => 'nullable|boolean',
+            'transmission' => 'nullable',
             'priceMin' => 'nullable|numeric|gte:0',
             'priceMax' => 'nullable|numeric'
         ]);
@@ -113,20 +113,21 @@ class OccasionsController extends Controller
     {
         // validate the form data that we got via POST request
         $this->validate($request, [
-            'make' => 'required',
-            'model' => 'required',
-            'color' => 'required',
+            'make' => 'required|string',
+            'model' => 'required|string',
+            'color' => 'required|string',
             'year' => 'required|numeric',
             'mileage' => 'required|numeric',
-            'fuel' => 'required',
+            'fuel' => 'required|string',
             'doors' => 'required|numeric',
             'engineCapacity' => 'required|numeric',
             'weight' => 'required|numeric',
-            'transmission' => 'required',
+            'transmission' => 'required|string',
             'gears' => 'required|numeric',
-            'plate' => 'required',
+            'plate' => 'required|string',
             'price' => 'required|numeric',
-            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000'
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000',
+            'extras' => 'nullable|string'
         ]);
         // Handle file uploads
         if($request->hasFile('images'))
@@ -169,6 +170,8 @@ class OccasionsController extends Controller
         $occasion->price = $request->input('price');
         // save image name as json
         $occasion->image_name = json_encode($data);
+        $occasion->old_price = $request->input('price');
+        $occasion->extras = $request->input('extras');
         $occasion->save();
         // success message
         Session::flash('success', 'Auto Toegevoegd');
@@ -197,6 +200,13 @@ class OccasionsController extends Controller
      */
     public function edit($id)
     {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
+
         $occasion = Occasion::find($id);
         // check for admin rights
         if(auth()->user()->id !== 1){
@@ -216,24 +226,31 @@ class OccasionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
         // Get current occasion info
         $occasion = Occasion::find($id);
         // validate the form data that we got via POST request
         $this->validate($request, [
-            'make' => 'required',
-            'model' => 'required',
-            'color' => 'required',
-            'year' => 'required',
-            'mileage' => 'required',
-            'fuel' => 'required',
-            'doors' => 'required',
-            'engineCapacity' => 'required',
-            'weight' => 'required',
-            'transmission' => 'required',
-            'gears' => 'required',
-            'plate' => 'required',
-            'price' => 'required',
-            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000'
+            'make' => 'required|string',
+            'model' => 'required|string',
+            'color' => 'required|string',
+            'year' => 'required|numeric',
+            'mileage' => 'required|numeric',
+            'fuel' => 'required|string',
+            'doors' => 'required|numeric',
+            'engineCapacity' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'transmission' => 'required|string',
+            'gears' => 'required|numeric',
+            'plate' => 'required|string',
+            'price' => 'required|numeric',
+            'images[]' => 'image|mimes:jpeg,jpg,png,svg|nullable|max:100000',
+            'extras' => 'nullable|string'
         ]);
         // Handle file uploads
         if($request->hasFile('images'))
@@ -289,6 +306,8 @@ class OccasionsController extends Controller
             // save image name as json
             $occasion->image_name = json_encode($data);
         }
+        $occasion->old_price = $request->input('price');
+        $occasion->extras = $request->input('extras');
         $occasion->save();
 
         // success message
@@ -306,15 +325,14 @@ class OccasionsController extends Controller
      */
     public function destroy($id)
     {
-        $occasion = Occasion::find($id);
-
         // check for admin rights
         if(auth()->user()->id !== 1){
             // error message
             Session::flash('error', 'Onbevoegde toegang');
             return redirect('/home');
         }
-
+        // Get the occasion with the right id
+        $occasion = Occasion::find($id);
         // If the occasion does not have the default image
         if($occasion->image_name !== '["noImage.png"]'){
             //convert from json
@@ -333,5 +351,53 @@ class OccasionsController extends Controller
 
         //redirect
         return redirect('/occasions');
+    }
+
+    /**
+     * Toggle occasion status as admin.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changeStatus(Request $request)
+    {
+        // check for admin rights
+        if(auth()->user()->id !== 1){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
+        // validate the form data that we got via POST request
+        $this->validate($request, [
+            'status' => 'nullable|string',
+            'id' => 'required|numeric'
+        ]);
+        // Get id  of current car we are changing
+        $id = $request->input('id');
+        // Get current occasion info
+        $occasion = Occasion::find($id);
+        
+        // if the car is sold 
+        if($request->input('status') == ''){
+            //set old price
+            $occasion->old_price = $occasion->price;
+            // change to sold
+            $occasion->price = 'Verkocht';
+        } 
+        // if the car is available
+        else if($request->input('status') == 'on'){
+            //set to old price
+            $occasion->price = $occasion->old_price;
+        }
+
+        // Save changes to database
+        $occasion->save();
+
+        // success message
+        Session::flash('success', 'Status geüpdatet');
+
+        //redirect
+        return $this->show($id);
     }
 }

@@ -13,7 +13,7 @@
         <div class="col s8">
             <div class="col s2">
                 <h6 class="thin">Prijs</h6>
-                <h6 class="bold">€{{$occasion->price}}</h6>
+                <h6 class="bold">{{ ($occasion->price > 0) ? "€" : "" }}{{$occasion->price}}</h6>
             </div>
             <div class="col s2">
                 <h6 class="thin">Kilometerstand</h6>
@@ -38,44 +38,51 @@
             </div>
         </div>
         <!-- buttons voor admin -->
-        @if(!Auth::guest())
-            @if(Auth::user()->id == 1)
-            <div class="row">
-                <div class="col s12">
-                    <hr>
-                    <h6 class="bold center">Advertentie instellingen</h6>
-                    <br>
-                </div>
-                <!-- edit button -->
-                <div class="col s2 offset-s4">
-                    <a href="/occasions/{{$occasion->id}}/edit" class="waves-effect waves-light btn-large green col s12"><i class="material-icons left col s2">edit</i>Bijwerken</a>
-                </div>
-                <!-- delete button -->
-                <div class="col s2">
-                    <form action="{{ action('OccasionsController@destroy', $occasion->id) }}" method="POST">
-                        <!-- CSRF Protection -->
-                        @csrf
-                        <!-- DELETE method instead of POST for the update request -->
-                        <input name="_method" type="hidden" value="DELETE">                
-                        <button class="waves-effect waves-light btn-large red col s12" type="submit" name="submit">Verwijderen
-                            <i class="material-icons right">delete</i>
-                        </button>
-                    </form>
-                </div>
+@if(!Auth::guest())
+    @if(Auth::user()->id == 1)
+        <div class="row">
+            <div class="col s12">
+                <hr>
+                <h6 class="bold center">Advertentie instellingen</h6>
+                <br>
             </div>
-            <!-- Advertisement active status -->
-            <div class="row">
-                <div class="switch col s2 offset-s5 center">
+            <!-- edit button -->
+            <div class="col s2 offset-s4">
+                <a href="/occasions/{{$occasion->id}}/edit" class="waves-effect waves-light btn-large green col s12"><i class="material-icons left col s2">edit</i>Bijwerken</a>
+            </div>
+            <!-- delete button -->
+            <div class="col s2">
+                <form action="{{ action('OccasionsController@destroy', $occasion->id) }}" method="POST">
+                    <!-- CSRF Protection -->
+                    @csrf
+                    <!-- DELETE method instead of POST for the update request -->
+                    <input name="_method" type="hidden" value="DELETE">                
+                    <button class="waves-effect waves-light btn-large red col s12" type="submit" name="submit">Verwijderen
+                        <i class="material-icons right">delete</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Advertisement active status -->
+        <div class="row">
+            <!-- toggle occasion status -->
+            <div class="switch col s2 offset-s5 center">
+                <form action="{{ action('OccasionsController@changeStatus', $occasion->id) }}" method="POST">
+                    <!-- CSRF Protection -->
+                    @csrf
                     <label>
                         Onbeschikbaar
-                        <input type="checkbox">
+                        <input {{ ($occasion->price > 0) ? "checked" : "" }} type="checkbox" name="status" onChange="this.form.submit()">
                         <span class="lever"></span>
                         Beschikbaar
                     </label>
-                </div>
+                    <!-- send ID -->
+                    <input type="hidden" name="id" value="{{$occasion->id}}">
+                </form>
             </div>
-            @endif
-        @endif
+        </div>
+    @endif
+@endif
     </div>
     <div class="row">
         <!-- Photos -->

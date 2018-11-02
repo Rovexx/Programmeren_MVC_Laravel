@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col s12">
                         <label>
-                            <input value="{{ old('transmission') ? 'checked' : '' }}" name="transmission" type="checkbox" class="filled-in"/>
+                            <input {{ (old('transmission') == 'on') ? "checked" : "" }} id="transmission" name="transmission" type="checkbox" class="filled-in"/>
                             <span>Alleen Automaat</span>
                         </label>
                     </div>
@@ -120,8 +120,24 @@
                                     <h6>{{$occasion->plate}}</h6>
                                 </div>
                                 <div class="col s4 thin">
-                                    <h5>Prijs: €{{$occasion->price}}</h5><br><br>
+                                    <h5>{{ ($occasion->price > 0) ? "Prijs: €" : "" }}{{$occasion->price}}</h5><br><br>
                                     <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-small amber"><i class="material-icons left">menu</i>Meer informatie</a>
+                                @if(!Auth::guest())
+                                    <!-- toggle favorite as user -->
+                                    <form action="/occasions/favorite" method="POST">
+                                        <!-- CSRF Protection -->
+                                        @csrf
+                                        <br>
+                                        <label>
+                                            <!-- send id of the selected car -->
+                                            <input @if(in_array($occasion->id, json_decode(auth()->user()->favorites))) checked @endif id="favoriteCarId" type="checkbox" class="filled-in" onChange="this.form.submit()"/>
+                                            <span>Favoriet</span>
+                                        </label>
+                                        <!-- send current user id -->
+                                        <input type="hidden" name="userId" value="{{auth()->user()->id}}">
+                                        <input type="hidden" name="favoriteCarId" value="{{$occasion->id}}">
+                                    </form>
+                                @endif
                                 </div>
                             </div>        
                         </div>

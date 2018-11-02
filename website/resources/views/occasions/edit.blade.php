@@ -124,6 +124,14 @@
                     </div>
                 </div>
 
+                <!-- extras field -->
+                <div class="row">
+                    <div class="input-field col s6">
+                        <textarea value="{{$occasion->extras}}" id="extras" name="extras" class="materialize-textarea"></textarea>
+                        <label for="extras">extra's</label>
+                    </div>
+                </div>
+
                 <div class="row">
                         <!-- back button -->
                         <div class="col s2">
