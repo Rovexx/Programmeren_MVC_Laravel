@@ -29,7 +29,7 @@
                                     <h5>{{auth()->user()->name}}</h5>
                                     <h5>{{auth()->user()->email}}</h5>
                                     <br>
-                                    <a class="btn amber" href="{{ route('password.request') }}">Aanpassen</a>
+                                    <a class="btn amber" href="/password/reset">Aanpassen</a>
                                 </div>
                             </div>
                         </div>
