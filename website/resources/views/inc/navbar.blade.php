@@ -24,14 +24,13 @@
                 </li>
             @else
                 <li><a class="dropdown-trigger" data-target="dropdown1">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
-                <!-- Dropdown Log out -->
+                <!-- Dropdown -->
                 <ul id="dropdown1" class="dropdown-content">
-                    <a class="amber" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
+                    <!-- Dashboard -->
+                    <li class="amber lighten-1"><a class="white-text" href="/dashboard">Dashboard</a></li>
+                    <!-- Log out -->
+                    <li class="amber lighten-1"><a class="white-text" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
