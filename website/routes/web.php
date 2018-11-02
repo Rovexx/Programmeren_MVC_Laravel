@@ -15,6 +15,10 @@ Route::post('/occasions/changeStatus', 'OccasionsController@changeStatus');
 
 // Route to add occasion listing to favorites as logged in user
 Route::post('/occasions/favorite', 'UsersController@favorite');
+// Routes for user dashboard
+Route::get('/dashboard', 'UsersController@index');
+// Routes for changing user dashboard settings
+Route::put('/dashboard/update', 'UsersController@update');
 
 // Routes for the login system
 Auth::routes();

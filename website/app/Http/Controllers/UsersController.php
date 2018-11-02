@@ -3,12 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
 use App\User;
+use Session;
 use Auth;
 
 class UsersController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Handle the favorite request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        
+        return view('dashboard.dashboard');
+    }
+
     /**
      * Handle the favorite request.
      *
@@ -66,5 +88,38 @@ class UsersController extends Controller
 
         //redirect
         return redirect()->route('occasions.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        // check for login
+        if(!Auth::user()){
+            // error message
+            Session::flash('error', 'Onbevoegde toegang');
+            return redirect('/home');
+        }
+        // validate the form data that we got via POST request
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|E-Mail',
+        ]);
+        // get the user data
+        $user = User::findOrFail(auth()->user()->id);
+        // Update the info
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        // success message
+        Session::flash('success', 'Profiel geüpdatet');
+
+        //redirect
+        return redirect('/dashboard');
     }
 }
