@@ -40,13 +40,7 @@
             </div>
             <br>
             <div class="col s6">
-                <iframe class="z-depth-2"
-                    width="100%"
-                    height="900px"
-                    frameborder="0" style="border:0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXNQYjd9lVLi87dOCgcnwx-XPGaPQqzE4
-                    &q=Autohandel+De+Voorbijgang" allowfullscreen>
-                </iframe>
+                @include('inc.maps')
             </div>
         </div>
     </div>
