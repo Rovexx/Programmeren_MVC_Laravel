@@ -12,7 +12,7 @@
                 <h5 class="white-text">Links</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="">Tel: 0184 614 013</a></li>
-                    <li><a class="grey-text text-lighten-3" href="">Twitter</a></li>
+                    <li><a class="grey-text text-lighten-3" href="/copyright">Copyright</a></li>
                     <li><a class="grey-text text-lighten-3" href="">Abbout</a></li>
                     <li><a class="grey-text text-lighten-3" href="">Privacybeleid</a></li>
                 </ul>

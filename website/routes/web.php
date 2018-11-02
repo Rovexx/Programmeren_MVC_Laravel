@@ -5,6 +5,7 @@ Route::get('/', 'PagesController@home');
 Route::get('/home', 'PagesController@home');
 Route::get('/route', 'PagesController@route');
 Route::get('/contact', 'PagesController@contact');
+Route::get('/copyright', 'PagesController@copyright');
 
 // Automatic routes for resources
 Route::resource('occasions', 'OccasionsController');
