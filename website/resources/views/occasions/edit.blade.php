@@ -39,7 +39,7 @@
                     </div>
                     <!-- Mileage -->
                     <div class="input-field col s3">
-                        <input value="{{$occasion->mileage}}" placeholder="bv. 70.000" name="mileage" type="number" min="0" class="validate">
+                        <input value="{{$occasion->mileage}}" placeholder="bv. 70000" name="mileage" type="number" min="0" class="validate">
                         <label for="mileage">Kilometerstand</label>
                     </div>
                     <!-- Fuel type -->
@@ -109,7 +109,7 @@
                     </div>
                     <!-- Price -->
                     <div class="input-field col s3">
-                        <input value="{{$occasion->price}}" placeholder="bv. 5.750" name="price" type="number" class="validate">
+                        <input value="{{$occasion->price}}" placeholder="bv. 5750" name="price" type="number" class="validate">
                         <label for="price">Prijs</label>
                     </div>
                     <!-- Picture -->
@@ -133,19 +133,19 @@
                 </div>
 
                 <div class="row">
-                        <!-- back button -->
-                        <div class="col s2">
-                            <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Annuleren</a>
-                        </div>
-                        <!-- submit button -->
-                        <div class="col s2 offset-s8">
-                            <div class="center">
-                                <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Bijwerken
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
+                    <!-- back button -->
+                    <div class="col s2">
+                        <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Annuleren</a>
+                    </div>
+                    <!-- submit button -->
+                    <div class="col s2 offset-s8">
+                        <div class="center">
+                            <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Bijwerken
+                                <i class="material-icons right">send</i>
+                            </button>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
     </div>
