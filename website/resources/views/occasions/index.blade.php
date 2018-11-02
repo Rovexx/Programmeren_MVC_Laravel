@@ -129,12 +129,11 @@
                                         @csrf
                                         <br>
                                         <label>
-                                            <!-- send id of the selected car -->
+                                            <!-- check box that represents favorite status -->
                                             <input @if(in_array($occasion->id, json_decode(auth()->user()->favorites))) checked @endif id="favoriteCarId" type="checkbox" class="filled-in" onChange="this.form.submit()"/>
                                             <span>Favoriet</span>
                                         </label>
-                                        <!-- send current user id -->
-                                        <input type="hidden" name="userId" value="{{auth()->user()->id}}">
+                                        <!-- send car id -->
                                         <input type="hidden" name="favoriteCarId" value="{{$occasion->id}}">
                                     </form>
                                 @endif
