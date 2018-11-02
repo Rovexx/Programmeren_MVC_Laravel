@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddOldPriceToOccasionsTable extends Migration
+class AddDefaultValueToFavoritesInUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddOldPriceToOccasionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('occasions', function ($table) {
-            $table->mediumInteger('old_price');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('favorites')->default('[]')->change();;
         });
     }
 
@@ -25,8 +25,8 @@ class AddOldPriceToOccasionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('occasions', function ($table) {
-            $table->dropColumn('old_price');
+        Schema::table('users', function (Blueprint $table) {
+            $table->mediumText('favorites')->change();;
         });
     }
 }
