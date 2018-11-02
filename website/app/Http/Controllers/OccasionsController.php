@@ -399,6 +399,5 @@ class OccasionsController extends Controller
 
         //redirect
         return $this->show($id);
-        
     }
 }
