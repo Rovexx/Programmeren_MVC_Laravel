@@ -188,7 +188,7 @@ class OccasionsController extends Controller
      */
     public function show($id)
     {
-        $occasion = Occasion::find($id);
+        $occasion = Occasion::findOrFail($id);
         return view('occasions.show')->with('occasion', $occasion);
     }
 
@@ -207,7 +207,7 @@ class OccasionsController extends Controller
             return redirect('/home');
         }
 
-        $occasion = Occasion::find($id);
+        $occasion = Occasion::findOrFail($id);
         // check for admin rights
         if(auth()->user()->id !== 1){
             // error message
@@ -233,7 +233,7 @@ class OccasionsController extends Controller
             return redirect('/home');
         }
         // Get current occasion info
-        $occasion = Occasion::find($id);
+        $occasion = Occasion::findOrFail($id);
         // validate the form data that we got via POST request
         $this->validate($request, [
             'make' => 'required|string',
@@ -332,7 +332,7 @@ class OccasionsController extends Controller
             return redirect('/home');
         }
         // Get the occasion with the right id
-        $occasion = Occasion::find($id);
+        $occasion = Occasion::findOrFail($id);
         // If the occasion does not have the default image
         if($occasion->image_name !== '["noImage.png"]'){
             //convert from json
@@ -376,7 +376,7 @@ class OccasionsController extends Controller
         // Get id  of current car we are changing
         $id = $request->input('id');
         // Get current occasion info
-        $occasion = Occasion::find($id);
+        $occasion = OccasionOrFail($id);
         
         // if the car is sold 
         if($request->input('status') == ''){
