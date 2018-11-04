@@ -1,7 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/resources/views/inc/maps.blade.php
 /storage/*.key
 /vendor
 /.idea
