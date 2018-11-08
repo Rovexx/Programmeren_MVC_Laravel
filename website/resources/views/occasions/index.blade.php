@@ -155,6 +155,7 @@
                     </div>
                 </li>
                 @endif
+                {{$occasions->links()}}
             </ul>
         </div>
     </div>
