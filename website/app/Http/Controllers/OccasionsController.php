@@ -78,9 +78,9 @@ class OccasionsController extends Controller
         }
         
         // Order results by make ascending and paginate to 15 per page
-        $occasions->orderBy('make', 'asc')->Paginate(15);
+        $occasions->orderBy('make', 'asc');
         // Get the results
-        $occasions = $occasions->get();
+        $occasions = $occasions->paginate(15);
         // pass old input data to session
         $request->flash();
         // Pass the results to the view
@@ -375,19 +375,22 @@ class OccasionsController extends Controller
         ]);
         // Get id  of current car we are changing
         $id = $request->input('id');
-        // Get current occasion info
-        $occasion = OccasionOrFail($id);
         
-        // if the car is sold 
-        if($request->input('status') == ''){
+        // Get current occasion info
+        $occasion = Occasion::findOrFail($id);
+        // Get current price status of car
+        $status = $occasion->price;
+        
+        // if the car is available
+        if($status > 0){
             //set old price
             $occasion->old_price = $occasion->price;
             // change to sold
-            $occasion->price = 'Verkocht';
+            $occasion->price = 0;
         } 
-        // if the car is available
-        else if($request->input('status') == 'on'){
-            //set to old price
+        // if the car is sold
+        else if($status == 0){
+            //set to old price so it is for sale again
             $occasion->price = $occasion->old_price;
         }
 
