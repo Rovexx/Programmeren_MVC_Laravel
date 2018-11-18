@@ -155,23 +155,23 @@ class OccasionsController extends Controller
         }
         // Create Occasion
         $occasion = new Occasion;
-        $occasion->make = $request->input('make');
-        $occasion->model = $request->input('model');
-        $occasion->color = $request->input('color');
-        $occasion->year = $request->input('year');
-        $occasion->mileage = $request->input('mileage');
-        $occasion->fuel = $request->input('fuel');
-        $occasion->doors = $request->input('doors');
+        $occasion->make =           ucfirst($request->input('make'));
+        $occasion->model =          ucfirst($request->input('model'));
+        $occasion->color =          ucfirst($request->input('color'));
+        $occasion->year =           $request->input('year');
+        $occasion->mileage =        $request->input('mileage');
+        $occasion->fuel =           ucfirst($request->input('fuel'));
+        $occasion->doors =          $request->input('doors');
         $occasion->engineCapacity = $request->input('engineCapacity');
-        $occasion->weight = $request->input('weight');
-        $occasion->transmission = $request->input('transmission');
-        $occasion->gears = $request->input('gears');
-        $occasion->plate = $request->input('plate');
-        $occasion->price = $request->input('price');
+        $occasion->weight =         $request->input('weight');
+        $occasion->transmission =   ucfirst($request->input('transmission'));
+        $occasion->gears =          $request->input('gears');
+        $occasion->plate =          strtoupper($request->input('plate'));
+        $occasion->price =          $request->input('price');
         // save image name as json
-        $occasion->image_name = json_encode($data);
-        $occasion->old_price = $request->input('price');
-        $occasion->extras = $request->input('extras');
+        $occasion->image_name =     json_encode($data);
+        $occasion->old_price =      $request->input('price');
+        $occasion->extras =         ucfirst($request->input('extras'));
         $occasion->save();
         // success message
         Session::flash('success', 'Auto Toegevoegd');

@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s10 offset-s1 z-index-1 white">
+        <div class="col s10 offset-s1 z-depth-1 white">
             <div class="col s6">
                 <h5 class="bold">Afrit 26 vanaf Gorinchem</h5><br>
                 <h6 class="flow-text">Als u op rijksweg A15/E31 komend vanuit de richting Gorinchem afrit 26 naar Hardinxveld-Giessendam/Giessenburg neemt, 
