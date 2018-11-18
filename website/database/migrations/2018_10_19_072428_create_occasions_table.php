@@ -27,8 +27,10 @@ class CreateOccasionsTable extends Migration
             $table->string('transmission');
             $table->tinyInteger('gears');
             $table->string('plate', 11);
-            $table->tinyText('price');
-            $table->timestamps();
+            $table->mediumInteger('price');
+            $table->mediumInteger('old_price');
+            $table->mediumText('image_name', 255);
+            $table->text('extras');
         });
     }
 

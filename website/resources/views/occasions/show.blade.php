@@ -13,7 +13,7 @@
         <div class="col s8">
             <div class="col s2">
                 <h6 class="thin">Prijs</h6>
-                <h6 class="bold">{{ ($occasion->price > 0) ? "€" : "" }}{{$occasion->price}}</h6>
+                <h6 class="bold">{{ ($occasion->price > 0) ? "€ $occasion->price" : "Verkocht" }}</h6>
             </div>
             <div class="col s2">
                 <h6 class="thin">Kilometerstand</h6>
@@ -98,35 +98,34 @@
         </div>
         <div class="col s5 offset-s1">
             <div class="row">
-                    <div class="col s3 thin">
-                        <h5>Model:</h5>
-                        <h5>Kleur:</h5>
-                        <h5>Bouwjaar:</h5>
-                        <h5>Kilometerstand:</h5>
-                        <h5>Benzine soort:</h5>
-                        <h5>Aantal deuren:</h5>
-                        <h5>Motorinhoud:</h5>
-                        <h5>Gewicht:</h5>
-                        <h5>Versnellingsbak:</h5>
-                        <h5>Kenteken:</h5>
-                    </div>
-                    <div class="col s4 normal">
-                        <h5>{{$occasion->model}}</h5>
-                        <h5>{{$occasion->color}}</h5>
-                        <h5>{{$occasion->year}}</h5>
-                        <h5>{{$occasion->mileage}}Km</h5>
-                        <h5>{{$occasion->fuel}}</h5>
-                        <h5>{{$occasion->doors}}</h5>
-                        <h5>{{$occasion->engineCapacity}}L</h5>
-                        <h5>{{$occasion->weight}}Kg</h5>
-                        <h5>{{$occasion->transmission}} {{$occasion->gears}}</h5>
-                        <h5>{{$occasion->plate}}</h5>
-                    </div>
-                    <div class="col s5">
-                        <h5>Extra's</h5>
-                        <h5>{{$occasion->extras}}</h5>
-                    </div>
-                </div>        
+                <div class="col s3 thin">
+                    <h5>Model:</h5>
+                    <h5>Kleur:</h5>
+                    <h5>Bouwjaar:</h5>
+                    <h5>Kilometerstand:</h5>
+                    <h5>Benzine soort:</h5>
+                    <h5>Aantal deuren:</h5>
+                    <h5>Motorinhoud:</h5>
+                    <h5>Gewicht:</h5>
+                    <h5>Versnellingsbak:</h5>
+                    <h5>Kenteken:</h5>
+                </div>
+                <div class="col s4 normal">
+                    <h5>{{$occasion->model}}</h5>
+                    <h5>{{$occasion->color}}</h5>
+                    <h5>{{$occasion->year}}</h5>
+                    <h5>{{$occasion->mileage}}Km</h5>
+                    <h5>{{$occasion->fuel}}</h5>
+                    <h5>{{$occasion->doors}}</h5>
+                    <h5>{{$occasion->engineCapacity}}L</h5>
+                    <h5>{{$occasion->weight}}Kg</h5>
+                    <h5>{{$occasion->transmission}} {{$occasion->gears}}</h5>
+                    <h5>{{$occasion->plate}}</h5>
+                </div>
+                <div class="col s5">
+                    <h5>Extra's</h5>
+                    <h5>{{$occasion->extras}}</h5>
+                </div>       
             </div>
         </div>
     </div>

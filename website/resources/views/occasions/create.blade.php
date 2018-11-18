@@ -14,12 +14,12 @@
                 <div class="row">
                     <!-- Make -->
                     <div class="input-field col s6">
-                        <input placeholder="bv. Ferrari" name="make" type="text" class="validate">
+                        <input placeholder="bv. Ford" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
                     <!-- Model -->
                     <div class="input-field col s6">
-                        <input placeholder="bv. 458 Italia" name="model" type="text" class="validate">
+                        <input placeholder="bv. Focus RS" name="model" type="text" class="validate">
                         <label for="model">Model</label>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     </div>
                     <!-- Mileage -->
                     <div class="input-field col s3">
-                        <input placeholder="bv. 114000" name="mileage" type="number" min="0" class="validate">
+                        <input placeholder="bv. 70000" name="mileage" type="number" min="0" class="validate">
                         <label for="mileage">Kilometerstand</label>
                     </div>
                     <!-- Fuel type -->
@@ -106,7 +106,7 @@
                     </div>
                     <!-- Price -->
                     <div class="input-field col s3">
-                        <input placeholder="bv. 256000" name="price" type="number" class="validate">
+                        <input placeholder="bv. 5750" name="price" type="number" class="validate">
                         <label for="price">Prijs</label>
                     </div>
                     <!-- Upload picture -->

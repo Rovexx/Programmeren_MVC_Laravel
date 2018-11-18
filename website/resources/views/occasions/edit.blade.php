@@ -16,12 +16,12 @@
                 <div class="row">
                     <!-- Make -->
                     <div class="input-field col s6">
-                        <input value="{{$occasion->make}}" placeholder="bv. Ferrari" name="make" type="text" class="validate">
+                        <input value="{{$occasion->make}}" placeholder="bv. Ford" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
                     <!-- Model -->
                     <div class="input-field col s6">
-                        <input value="{{$occasion->model}}" placeholder="bv. 458 Italia" name="model" type="text" class="validate">
+                        <input value="{{$occasion->model}}" placeholder="bv. Focus" name="model" type="text" class="validate">
                         <label for="model">Model</label>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     </div>
                     <!-- Mileage -->
                     <div class="input-field col s3">
-                        <input value="{{$occasion->mileage}}" placeholder="bv. 114000" name="mileage" type="number" min="0" class="validate">
+                        <input value="{{$occasion->mileage}}" placeholder="bv. 70000" name="mileage" type="number" min="0" class="validate">
                         <label for="mileage">Kilometerstand</label>
                     </div>
                     <!-- Fuel type -->
@@ -109,7 +109,7 @@
                     </div>
                     <!-- Price -->
                     <div class="input-field col s3">
-                        <input value="{{$occasion->price}}" placeholder="bv. 256000" name="price" type="number" class="validate">
+                        <input value="{{$occasion->price}}" placeholder="bv. 5750" name="price" type="number" class="validate">
                         <label for="price">Prijs</label>
                     </div>
                     <!-- Picture -->
@@ -127,25 +127,25 @@
                 <!-- extras field -->
                 <div class="row">
                     <div class="input-field col s6">
-                        <textarea value="{{$occasion->extras}}" id="extras" name="extras" class="materialize-textarea"></textarea>
+                        <textarea id="extras" name="extras" class="materialize-textarea">{{$occasion->extras}}</textarea>
                         <label for="extras">extra's</label>
                     </div>
                 </div>
 
                 <div class="row">
-                        <!-- back button -->
-                        <div class="col s2">
-                            <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Annuleren</a>
-                        </div>
-                        <!-- submit button -->
-                        <div class="col s2 offset-s8">
-                            <div class="center">
-                                <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Bijwerken
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
+                    <!-- back button -->
+                    <div class="col s2">
+                        <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-large amber col s12"><i class="material-icons left">arrow_back</i>Annuleren</a>
+                    </div>
+                    <!-- submit button -->
+                    <div class="col s2 offset-s8">
+                        <div class="center">
+                            <button class="waves-effect waves-light btn-large amber col s12" type="submit" name="submit">Bijwerken
+                                <i class="material-icons right">send</i>
+                            </button>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
     </div>

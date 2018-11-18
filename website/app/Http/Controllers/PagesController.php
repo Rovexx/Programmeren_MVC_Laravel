@@ -19,4 +19,8 @@ class PagesController extends Controller
     public function contact(){
         return view('pages.contact');
     }
+    // Show copyright page
+    public function copyright(){
+        return view('pages.copyright');
+    }
 }

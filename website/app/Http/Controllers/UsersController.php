@@ -48,14 +48,13 @@ class UsersController extends Controller
 
         // validate the form data that we got via POST request
         $this->validate($request, [
-            'favoriteCarId' => 'required|string',
-            'userId' => 'required|numeric'
+            'favoriteCarId' => 'required|string'
         ]);
         
         // Get id of current car we are adding as favorite
         $favoriteCarId = $request->input('favoriteCarId');
         // find the current user by id and get his data
-        $user = User::findOrFail($request->input('userId'));
+        $user = User::findOrFail(auth()->user()->id);
         // Get current favorites
         $userFavorites = json_decode($user->favorites);
 

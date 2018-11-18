@@ -11,14 +11,14 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">search</i>
-                        <input value="{{ old('searchBar') }}" placeholder="bv. Ferrari 458" name="searchBar" type="text" class="validate">
+                        <input value="{{ old('searchBar') }}" placeholder="bv. Ford focus" name="searchBar" type="text" class="validate">
                         <label for="icon_prefix2">Zoeken</label>
                     </div>
                 </div>
                 <!-- Make -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input value="{{ old('make') }}" placeholder="bv. Ferrari" name="make" type="text" class="validate">
+                        <input value="{{ old('make') }}" placeholder="bv. Opel" name="make" type="text" class="validate">
                         <label for="make">Merk</label>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                                     <h6>{{$occasion->plate}}</h6>
                                 </div>
                                 <div class="col s4 thin">
-                                    <h5>{{ ($occasion->price > 0) ? "Prijs: €" : "" }}{{$occasion->price}}</h5><br><br>
+                                    <h5>{{ ($occasion->price > 0) ? "Prijs: € $occasion->price" : "Verkocht"}}</h5><br><br>
                                     <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-small amber"><i class="material-icons left">menu</i>Meer informatie</a>
                                 @if(!Auth::guest())
                                     <!-- toggle favorite as user -->
@@ -129,12 +129,11 @@
                                         @csrf
                                         <br>
                                         <label>
-                                            <!-- send id of the selected car -->
+                                            <!-- check box that represents favorite status -->
                                             <input @if(in_array($occasion->id, json_decode(auth()->user()->favorites))) checked @endif id="favoriteCarId" type="checkbox" class="filled-in" onChange="this.form.submit()"/>
                                             <span>Favoriet</span>
                                         </label>
-                                        <!-- send current user id -->
-                                        <input type="hidden" name="userId" value="{{auth()->user()->id}}">
+                                        <!-- send car id -->
                                         <input type="hidden" name="favoriteCarId" value="{{$occasion->id}}">
                                     </form>
                                 @endif
@@ -156,6 +155,7 @@
                     </div>
                 </li>
                 @endif
+                {{$occasions->links()}}
             </ul>
         </div>
     </div>

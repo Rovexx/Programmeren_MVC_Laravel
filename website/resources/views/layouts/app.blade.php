@@ -16,6 +16,8 @@
 
         <!-- Website Title -->
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Icon -->
+        <link rel="icon" href="{!! asset('images/icon.png') !!}">
     </head>
 
     <body>
