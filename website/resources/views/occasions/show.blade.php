@@ -13,7 +13,7 @@
         <div class="col s8">
             <div class="col s2">
                 <h6 class="thin">Prijs</h6>
-                <h6 class="bold">{{ ($occasion->price > 0) ? "€ $occasion->price" : "Verkocht" }}</h6>
+                <h6 class="bold">{{ ($occasion->price > 0) ? "€".number_format($occasion->price, 0, '', '.') : "Verkocht" }}</h6>
             </div>
             <div class="col s2">
                 <h6 class="thin">Kilometerstand</h6>

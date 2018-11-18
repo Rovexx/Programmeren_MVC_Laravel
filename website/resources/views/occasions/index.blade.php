@@ -120,7 +120,7 @@
                                     <h6>{{$occasion->plate}}</h6>
                                 </div>
                                 <div class="col s4 thin">
-                                    <h5>{{ ($occasion->price > 0) ? "Prijs: € $occasion->price" : "Verkocht"}}</h5><br><br>
+                                    <h5>{{ ($occasion->price > 0) ? "Prijs: € ".number_format($occasion->price, 0, '', '.') : "Verkocht"}}</h5><br><br>
                                     <a href="/occasions/{{$occasion->id}}" class="waves-effect waves-light btn-small amber"><i class="material-icons left">menu</i>Meer informatie</a>
                                 @if(!Auth::guest())
                                     <!-- toggle favorite as user -->
